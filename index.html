@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saludo</title>
+    <link href="css/estilos.css" rel="stylesheet">
+    <script type="module" src="cmp/mi-footer.js"></script>
+  </head>
+  <body>
+    <form id="form">
+      <h1>Datos</h1>
+      <p>
+        <label>
+          Nombre:
+          <input type="text" name="nombre"><br>
+          <br>
+          Boleta: 
+          <input type="text" name="boleta"><br>
+          <br>
+          Grupo:
+          <input type="text" name="grupo"><br>
+          <br>
+          Materia:
+          <input type="text" name="materia"><br>
+          <br>
+          Fecha:
+          <input type="text" name="fecha"><br>
+        </label>
+      </p>
+      <p><button>Enviar</button></p>
+      <p><output name="salida"></output></p>
+    </form>
+    <mi-footer></mi-footer>
+    <script type="module">
+      import { Ctrl } from "/js/Ctrl.js";
+      const ctrl = new Ctrl();
+      form.addEventListener("submit", evt => {
+        try {
+          evt.preventDefault();
+          const datos = new FormData(form);
+          const nombre = datos.get("nombre");
+          const envia = ctrl.Enviar(nombre);
+          const boleta = datos.get("boleta");
+          const envia = ctrl.Enviar(boleta);
+          const grupo = datos.get("grupo");
+          const envia = ctrl.Enviar(grupo);
+          const materia = datos.get("materia");
+          const envia = ctrl.Enviar(materia);
+          const fecha = datos.get("fecha");
+          const envia = ctrl.Enviar(fecha);
+          form.salida.value = envia;
+        } catch (error) {
+          console.log(error);
+          form.salida.value = error.message;
+        }
+      });
+    </script>
+  </body>
+</html>
